@@ -228,11 +228,13 @@ const App = () => {
         <Nav />
       </header>
 
-      <div className="books-container container">
-        {books.map((book) => (
-          <BookCard key={book.id} {...book} />
-        ))}
-      </div>
+      <main>
+        <div className="books-container container">
+          {books.map((book) => (
+            <BookCard key={book.id} {...book} />
+          ))}
+        </div>
+      </main>
     </div>
   );
 };

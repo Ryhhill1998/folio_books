@@ -3,7 +3,7 @@ import logoImageSrc from "../../images/logo.png";
 
 const Nav = () => {
   return (
-    <nav className="navigation">
+    <nav className="navigation container">
       <div className="image-container">
         <img src={logoImageSrc} alt="logo" />
       </div>
