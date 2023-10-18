@@ -22,7 +22,7 @@
   --font-weight-bold-3: 700;
 
   /* max-width */
-  --max-width-content: 900px;
+  --max-width-content: 970px;
 
   /* align element in centre of container */
   --margin-align-center: 0 auto;
@@ -62,7 +62,7 @@ body {
 img {
   width: 100%;
   height: 100%;
-  object-fit:fill;
+  object-fit: fill;
 }
 
 button {

@@ -1,5 +1,6 @@
 import "./App.scss";
 import BookCard from "./components/BookCard/BookCard";
+import Nav from "./components/Nav/Nav";
 
 const books = [
   {
@@ -223,6 +224,10 @@ const books = [
 const App = () => {
   return (
     <div className="App">
+      <header>
+        <Nav />
+      </header>
+
       <div className="books-container container">
         {books.map((book) => (
           <BookCard key={book.id} {...book} />
