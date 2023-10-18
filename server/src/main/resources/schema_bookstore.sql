@@ -4,15 +4,12 @@ USE ecommerce_db;
 
 CREATE TABLE book(
 	id int auto_increment,
-    author_fname varchar(45),
-    author_sname varchar(45),
+    author varchar(255),
     title varchar(255),
-    genre varchar(255), 
-    release_year int,
-    age_rating int,
-    customer_rating float,
-    stock_quantity int,
-    price decimal(6, 2),
+    image_src tinytext,
+	stars float,
+	price decimal(6, 2),
+	stock_quantity int,
     PRIMARY KEY (id)
 );
 
