@@ -4,11 +4,11 @@
 :root {
   /* themes */
   /* change this to your chosen primary theme */
-  --primary-theme: #418a9d;
+  --primary-theme: #e09f3e;
   /* change this to your chosen secondary theme */
-  --secondary-theme: #00796b;
+  --secondary-theme: #335c67;
   /* change this to your chosen background theme */
-  --background-theme: #e7f5f8;
+  --background-theme: #5e828c;
 
   /* font sizes - feel free to adjust based on your design */
   --font-size-heading: 1.5rem;
@@ -22,7 +22,7 @@
   --font-weight-bold-3: 700;
 
   /* max-width */
-  --max-width-content: 970px;
+  --max-width-content: 1200px;
 
   /* align element in centre of container */
   --margin-align-center: 0 auto;
@@ -48,7 +48,7 @@
 }
 
 body {
-  background-color: var(--background-theme);
+  background-color: var(--secondary-theme);
 }
 
 .container {

@@ -1,6 +1,8 @@
 import "./BookCard.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faCirclePlus,
+  faPlus,
   faStar as fullStarIcon,
   faStarHalfStroke as halfStarIcon,
 } from "@fortawesome/free-solid-svg-icons";
@@ -8,22 +10,35 @@ import { faStar as emptyStarIcon } from "@fortawesome/free-regular-svg-icons";
 
 const BookCard = ({ title, image_src, author, stars, price }) => {
   const renderStars = () => {
-    const fullStars = Math.floor(stars);
-    const halfStars = Math.ceil(stars - fullStars);
-    const emptyStars = Math.floor(5 - stars);
+    const numberOfStars = stars ?? 0;
+    const fullStars = Math.floor(numberOfStars);
+    const halfStars = Math.ceil(numberOfStars - fullStars);
+    const emptyStars = Math.floor(5 - numberOfStars);
 
     return (
       <div className="stars-container">
         {new Array(fullStars).fill(0).map((_, index) => (
-          <FontAwesomeIcon key={`full-star-${index}`} icon={fullStarIcon} />
+          <FontAwesomeIcon
+            key={`full-star-${index}`}
+            className="icon"
+            icon={fullStarIcon}
+          />
         ))}
 
         {new Array(halfStars).fill(0).map((_, index) => (
-          <FontAwesomeIcon key={`half-star-${index}`} icon={halfStarIcon} />
+          <FontAwesomeIcon
+            key={`half-star-${index}`}
+            className="icon"
+            icon={halfStarIcon}
+          />
         ))}
 
         {new Array(emptyStars).fill(0).map((_, index) => (
-          <FontAwesomeIcon key={`empty-star-${index}`} icon={halfStarIcon} />
+          <FontAwesomeIcon
+            key={`empty-star-${index}`}
+            className="icon"
+            icon={emptyStarIcon}
+          />
         ))}
       </div>
     );
@@ -35,15 +50,23 @@ const BookCard = ({ title, image_src, author, stars, price }) => {
         <img src={image_src} alt="title" />
       </div>
 
-      <button className="add-button">Add to Basket</button>
+      <div className="details-container">
+        <div className="details-top">
+          <h2 className="title">{title}</h2>
 
-      <h2 className="title">{title}</h2>
+          <div className="stars-and-price-container">
+            {renderStars()}
 
-      <p>{author}</p>
+            <p>£{price}</p>
+          </div>
 
-      {stars > 0 && renderStars()}
+          <p>{author}</p>
+        </div>
 
-      <p>£{price}</p>
+        <button className="add-button">
+          Add to Basket <FontAwesomeIcon icon={faPlus} />
+        </button>
+      </div>
     </div>
   );
 };
