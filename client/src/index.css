@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Pacifico&display=swap");
+
+/* -------------------- CSS VARIABLES -------------------- */
+:root {
+  /* themes */
+  /* change this to your chosen primary theme */
+  --primary-theme: #418a9d;
+  /* change this to your chosen secondary theme */
+  --secondary-theme: #00796b;
+  /* change this to your chosen background theme */
+  --background-theme: #e7f5f8;
+
+  /* font sizes - feel free to adjust based on your design */
+  --font-size-heading: 1.5rem;
+  --font-size-sub-heading: 1.2rem;
+  --font-size-content: 0.85rem;
+
+  /* font weights - feel free to adjust based on your design */
+  --font-weight-regular: 400;
+  --font-weight-bold-1: 500;
+  --font-weight-bold-2: 600;
+  --font-weight-bold-3: 700;
+
+  /* max-width */
+  --max-width-content: 900px;
+
+  /* align element in centre of container */
+  --margin-align-center: 0 auto;
+
+  /* padding */
+  --padding-content: 1em 1.5em;
+
+  /* border radius */
+  --border-radius: 8px;
+
+  /* border */
+  --border-solid: 2px solid var(--primary-theme);
+}
+
+/* -------------------- GLOBAL STYLES -------------------- */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: var(--font-weight-regular);
+}
+
+body {
+  background-color: var(--background-theme);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width-content);
+  margin: var(--margin-align-center);
+  padding: var(--padding-content);
+  position: relative;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit:fill;
+}
+
+button {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}
