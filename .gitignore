@@ -1,2 +1,4 @@
 client/node_modules
 scraper/venv
+.idea/
+folio_books.iml
