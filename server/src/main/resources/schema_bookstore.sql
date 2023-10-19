@@ -2,8 +2,8 @@ DROP DATABASE ecommerce_db;
 CREATE DATABASE ecommerce_db;
 USE ecommerce_db;
 
-CREATE TABLE book(
-	id int auto_increment,
+CREATE TABLE book_romance(
+	id varchar(255),
     author varchar(255),
     title varchar(255),
     image_src tinytext,
@@ -12,6 +12,51 @@ CREATE TABLE book(
 	stock_quantity int,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE book_science_fiction(
+	id varchar(255),
+    author varchar(255),
+    title varchar(255),
+    image_src tinytext,
+	stars float,
+	price decimal(6, 2),
+	stock_quantity int,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE book_fantasy(
+	id varchar(255),
+    author varchar(255),
+    title varchar(255),
+    image_src tinytext,
+	stars float,
+	price decimal(6, 2),
+	stock_quantity int,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE book_science_fiction(
+	id varchar(255),
+    author varchar(255),
+    title varchar(255),
+    image_src tinytext,
+	stars float,
+	price decimal(6, 2),
+	stock_quantity int,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE book_crime_mystery_thriller(
+	id varchar(255),
+    author varchar(255),
+    title varchar(255),
+    image_src tinytext,
+	stars float,
+	price decimal(6, 2),
+	stock_quantity int,
+    PRIMARY KEY (id)
+);
+
 
 CREATE TABLE customer(
 	id int,
