@@ -1,5 +1,3 @@
-use ecommerce_db;
-
 INSERT INTO book(id, title, author, image_src, price, stars) VALUES
 ('eb30c283-195e-4182-baf3-c3c14698fef1', 'Fourth Wing', 'Rebecca Yarros', 'https://cdn.waterstones.com/override/v3/medium/9780/3494/9780349441573.jpg', 20.0, 4.5),
 ('762a4995-7c8b-43b9-9bf4-7934a916406a', 'Really Good, Actually', 'Monica Heisey', 'https://cdn.waterstones.com/bookjackets/medium/9780/0085/9780008511760.jpg', 8.49, 5),
