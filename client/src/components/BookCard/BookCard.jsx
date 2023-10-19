@@ -1,14 +1,15 @@
 import "./BookCard.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCirclePlus,
-  faPlus,
   faStar as fullStarIcon,
   faStarHalfStroke as halfStarIcon,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as emptyStarIcon } from "@fortawesome/free-regular-svg-icons";
+import { useState } from "react";
 
-const BookCard = ({ title, image_src, author, stars, price }) => {
+const BookCard = ({ id, title, image_src, author, stars, price }) => {
+  const [hoveredId, setHoveredId] = useState(null);
+
   const renderStars = () => {
     const numberOfStars = stars ?? 0;
     const fullStars = Math.floor(numberOfStars);
@@ -45,28 +46,32 @@ const BookCard = ({ title, image_src, author, stars, price }) => {
   };
 
   return (
-    <div className="book-card">
+    <div
+      className="book-card"
+      onMouseEnter={() => setHoveredId(id)}
+      onMouseLeave={() => setHoveredId(null)}
+    >
       <div className="image-container">
         <img src={image_src} alt="title" />
       </div>
 
-      <div className="details-container">
-        <div className="details-top">
-          <h2 className="title">{title}</h2>
+      {id === hoveredId && <div className="overlay"></div>}
 
-          <div className="stars-and-price-container">
+      {id === hoveredId && (
+        <div className="details-container">
+          <div className="details-top">
+            <h2 className="title">{title}</h2>
+
+            <p>by {author}</p>
+
             {renderStars()}
 
             <p>£{price}</p>
           </div>
 
-          <p>{author}</p>
+          <button className="add-button">Add to Basket</button>
         </div>
-
-        <button className="add-button">
-          Add to Basket <FontAwesomeIcon icon={faPlus} />
-        </button>
-      </div>
+      )}
     </div>
   );
 };

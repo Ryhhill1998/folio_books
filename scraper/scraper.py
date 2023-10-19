@@ -1,47 +1,45 @@
 import requests
 from bs4 import BeautifulSoup
-import uuid, json
+import uuid, json, random
 
-BASE_URL = "https://www.waterstones.com/books/bestsellers"
+BASE_URL = "https://www.whsmith.co.uk/books/graphic-novels-comic-books-and-manga/bks00884/?p="
+
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.60"}
 
-html = requests.get(BASE_URL, headers=HEADERS).text
-soup = BeautifulSoup(html, "html.parser")
+json_data = None
 
-book_previews = soup.find_all("div", class_="book-preview")
+with open("../../books.json", "r") as file:
+    json_data = json.load(file)
 
-json_data = {"data": {"books": []}}
+stars_array = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]
 
-for preview in book_previews:
-    title = preview.find("a", class_="title").text
-    img_src = preview.find("img")["data-src"]
-    author = preview.find("a", class_="text-gold").text
-    price_container = preview.find("div", class_="book-price")
-    price = float(preview.find_all("span", class_="price")[-1].text.strip().split("\u00a3")[-1])
-    star_rating_container = preview.find("div", class_="star-rating")
-    stars = 0
+def get_books(url, category):
+    html = requests.get(url, headers=HEADERS).text
+    soup = BeautifulSoup(html, "html.parser")
 
-    if star_rating_container:
-        star_spans = star_rating_container.find_all("span")
+    book_previews = soup.find_all("div", class_="product-tile")
 
-        for star in star_spans:
-            class_name = star.attrs['class']
-            star_type = class_name[-1]
-            if star_type == "full":
-                stars += 1
-            elif star_type == "half":
-                stars += 0.5
-    else:
-        stars = None
+    for preview in book_previews:
+        title = preview.find("h4", class_="ellip").text
+        image_src = "https://www.whsmith.co.uk" + preview.find("meta")["content"]
+        author_container = preview.find("div", class_="tile-attribute")
+        author = None
+        if author_container:
+            author = author_container.find("p").text
+        price = random.randint(4, 19) + random.choice([0.49, 0.99])
+        stars = random.choice(stars_array)
 
-    json_data["data"]["books"].append({
-        "id": str(uuid.uuid4()),
-        "title": title,
-        "author": author,
-        "image_src": img_src,
-        "price": price,
-        "stars": stars
-    })
+        json_data["books"][category].append({
+            "id": str(uuid.uuid4()),
+            "title": title,
+            "author": author,
+            "image_src": image_src,
+            "price": price,
+            "stars": stars
+        })
+
+for page_number in range(1, 11):
+    get_books(f"{BASE_URL}{page_number}", "graphic_novels")
 
 with open("../../books.json", "w+") as file:
     file.write(json.dumps(json_data))
