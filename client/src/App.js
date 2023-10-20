@@ -20,7 +20,25 @@ const App = () => {
 
       <main>
         <div className="books-container container">
-          {books.map((book) => (
+          {books["romance"]?.slice(0, 10)?.map((book) => (
+            <BookCard key={book.id} {...book} />
+          ))}
+        </div>
+
+        <div className="books-container container">
+          {books["crime_mystery_thriller"]?.slice(0, 10)?.map((book) => (
+            <BookCard key={book.id} {...book} />
+          ))}
+        </div>
+
+        <div className="books-container container">
+          {books["science_fiction"]?.slice(0, 10)?.map((book) => (
+            <BookCard key={book.id} {...book} />
+          ))}
+        </div>
+
+        <div className="books-container container">
+          {books["graphic_novels"]?.slice(0, 10)?.map((book) => (
             <BookCard key={book.id} {...book} />
           ))}
         </div>
