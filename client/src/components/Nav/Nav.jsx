@@ -5,29 +5,45 @@ import {
   faCartShopping,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Nav = () => {
   const [isSearchMode, setIsSearchMode] = useState(false);
 
+  useEffect(() => {
+    console.log({ isSearchMode });
+  }, [isSearchMode]);
+
   return (
     <nav className="navigation container">
-      <div className="image-container">
-        <img src={logoImageSrc} alt="logo" />
-      </div>
+      {!isSearchMode && (
+        <div className="image-container">
+          <img src={logoImageSrc} alt="logo" />
+        </div>
+      )}
 
       <div className="rhs-container">
-        <div className="search-container">
+        <div className={`search-container${isSearchMode ? " active" : ""}`}>
           <button>
             <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
           </button>
 
-          <input type="search" placeholder="search" />
+          <input
+            type="search"
+            placeholder="search"
+            onFocus={() => setIsSearchMode(true)}
+          />
         </div>
 
-        <button>
-          <FontAwesomeIcon icon={faCartShopping} className="icon" />
-        </button>
+        {!isSearchMode && (
+          <button>
+            <FontAwesomeIcon icon={faCartShopping} className="icon" />
+          </button>
+        )}
+
+        {isSearchMode && (
+          <button onClick={() => setIsSearchMode(false)}>Cancel</button>
+        )}
       </div>
     </nav>
   );
