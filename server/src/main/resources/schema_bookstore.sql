@@ -4,59 +4,15 @@ USE ecommerce_db;
 
 CREATE TABLE book_romance(
 	id varchar(255),
-    author varchar(255),
     title varchar(255),
-    image_src tinytext,
+    author varchar(255),
+    genre varchar(255),
+    image_src varchar(255),
 	stars float,
 	price decimal(6, 2),
 	stock_quantity int,
     PRIMARY KEY (id)
 );
-
-CREATE TABLE book_science_fiction(
-	id varchar(255),
-    author varchar(255),
-    title varchar(255),
-    image_src tinytext,
-	stars float,
-	price decimal(6, 2),
-	stock_quantity int,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE book_fantasy(
-	id varchar(255),
-    author varchar(255),
-    title varchar(255),
-    image_src tinytext,
-	stars float,
-	price decimal(6, 2),
-	stock_quantity int,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE book_science_fiction(
-	id varchar(255),
-    author varchar(255),
-    title varchar(255),
-    image_src tinytext,
-	stars float,
-	price decimal(6, 2),
-	stock_quantity int,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE book_crime_mystery_thriller(
-	id varchar(255),
-    author varchar(255),
-    title varchar(255),
-    image_src tinytext,
-	stars float,
-	price decimal(6, 2),
-	stock_quantity int,
-    PRIMARY KEY (id)
-);
-
 
 CREATE TABLE customer(
 	id int,
