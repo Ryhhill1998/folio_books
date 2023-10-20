@@ -2,7 +2,7 @@ DROP DATABASE ecommerce_db;
 CREATE DATABASE ecommerce_db;
 USE ecommerce_db;
 
-CREATE TABLE book_romance(
+CREATE TABLE book(
 	id varchar(255),
     title varchar(255),
     author varchar(255),
@@ -42,7 +42,7 @@ CREATE TABLE customer_order(
 CREATE TABLE order_line(
 	id int,
     order_id int,
-    book_id int,
+    book_id varchar(255),
     quantity int,
     price_per_book decimal(6, 2),
     PRIMARY KEY (id),
