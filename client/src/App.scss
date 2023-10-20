@@ -10,15 +10,17 @@ main {
   display: flex;
   flex-direction: column;
   gap: 4em;
-}
 
-.genre-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
+  .search-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
+  }
 
   h2 {
     color: white;
     font-weight: var(--font-weight-bold-1);
+    margin-bottom: 1em;
   }
 }
