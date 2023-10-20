@@ -12,9 +12,13 @@ main {
   gap: 4em;
 }
 
-.books-container {
+.genre-container {
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: column;
   gap: 1em;
-  overflow-x: auto;
+
+  h2 {
+    color: white;
+    font-weight: var(--font-weight-bold-1);
+  }
 }

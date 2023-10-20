@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.scss";
-import BookCard from "./components/BookCard/BookCard";
 import Nav from "./components/Nav/Nav";
+import Carousel from "./components/Carousel/Carousel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const App = () => {
   const [books, setBooks] = useState([]);
@@ -22,41 +23,25 @@ const App = () => {
         <div className="genre-container container">
           <h2>Romance</h2>
 
-          <div className="books-container">
-            {books["romance"]?.slice(0, 10)?.map((book) => (
-              <BookCard key={book.id} {...book} />
-            ))}
-          </div>
+          <Carousel books={books["romance"]} />
         </div>
 
         <div className="genre-container container">
           <h2>Crime, Mystery and Thriller</h2>
 
-          <div className="books-container">
-            {books["crime_mystery_thriller"]?.slice(0, 10)?.map((book) => (
-              <BookCard key={book.id} {...book} />
-            ))}
-          </div>
+          <Carousel books={books["crime_mystery_thriller"]} />
         </div>
 
         <div className="genre-container container">
           <h2>Science Fiction</h2>
 
-          <div className="books-container">
-            {books["science_fiction"]?.slice(0, 10)?.map((book) => (
-              <BookCard key={book.id} {...book} />
-            ))}
-          </div>
+          <Carousel books={books["science_fiction"]} />
         </div>
 
         <div className="genre-container container">
           <h2>Graphic Novels</h2>
 
-          <div className="books-container">
-            {books["graphic_novels"]?.slice(0, 10)?.map((book) => (
-              <BookCard key={book.id} {...book} />
-            ))}
-          </div>
+          <Carousel books={books["graphic_novels"]} />
         </div>
       </main>
     </div>

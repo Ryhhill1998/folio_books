@@ -1,0 +1,34 @@
+.carousel {
+  .books-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2em;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .arrow {
+    background-color: white;
+    border-radius: 50%;
+    border: none;
+    position: absolute;
+    z-index: 50;
+    border: solid 2px white;
+
+    .icon {
+      color: var(--primary-theme);
+      font-size: 2rem;
+      border-radius: 50%;
+    }
+
+    &.left-arrow {
+      top: 50%;
+      left: 0.5em;
+    }
+
+    &.right-arrow {
+      top: 50%;
+      right: 0.5em;
+    }
+  }
+}
