@@ -11,7 +11,6 @@ import { useEffect, useRef, useState } from "react";
 const Carousel = ({ books }) => {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
-  const [scrollPosition, setScrollPosition] = useState(0);
 
   const ref = useRef(null);
 
@@ -36,8 +35,6 @@ const Carousel = ({ books }) => {
       left: updatedScrollPosition,
       behavior: "smooth",
     });
-
-    setScrollPosition(updatedScrollPosition);
   };
 
   return (

@@ -8,4 +8,52 @@
     width: 100px;
     display: flex;
   }
+
+  .rhs-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1em;
+    width: 100%;
+
+    .search-container {
+      display: flex;
+      background-color: white;
+      border-radius: 16px;
+      overflow: hidden;
+      width: 50%;
+
+      input {
+        border: none;
+        width: 100%;
+        padding-right: 0.5em;
+        font-size: 0.9rem;
+        color: var(--secondary-theme);
+        font-weight: var(--font-weight-bold-1);
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      button {
+        padding: 0.5em 0.75em;
+        border-radius: 16px;
+
+        .icon {
+          color: var(--secondary-theme);
+        }
+      }
+    }
+
+    button {
+      border: none;
+      background: none;
+
+      .icon {
+        color: white;
+        font-size: 1.1rem;
+      }
+    }
+  }
 }
