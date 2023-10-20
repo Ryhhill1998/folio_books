@@ -12,10 +12,12 @@ const Carousel = ({ books }) => {
   const ref = useRef(null);
 
   const handleArrowClick = (multiplier) => {
-    const { scrollLeft } = ref.current;
+    const { clientWidth, scrollLeft } = ref.current;
+
+    const fullBooksOnShow = Math.floor(clientWidth / 184);
 
     ref.current.scrollTo({
-      left: scrollLeft + multiplier * 300,
+      left: scrollLeft + multiplier * fullBooksOnShow * 184,
       behavior: "smooth",
     });
   };
