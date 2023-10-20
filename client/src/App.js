@@ -15,6 +15,22 @@ const App = () => {
   const [graphicNovelBooks, setGraphicNovelBooks] = useState([]);
 
   const searchIsActive = useSearchStore((store) => store.active);
+  const searchQuery = useSearchStore((store) => store.query);
+
+  const renderFilteredBooks = () => {
+    const filteredBooks = books.filter((book) => {
+      const { title, author, genre } = book;
+
+      return (
+        !searchQuery ||
+        title?.toLowerCase()?.includes(searchQuery.toLowerCase()) ||
+        author?.toLowerCase()?.includes(searchQuery.toLowerCase()) ||
+        genre?.toLowerCase()?.includes(searchQuery.toLowerCase())
+      );
+    });
+
+    return filteredBooks?.map((book) => <BookCard key={book.id} {...book} />);
+  };
 
   useEffect(() => {
     fetch("http://localhost:8000/books")
@@ -46,11 +62,7 @@ const App = () => {
           <div className="container">
             <h2>Search Results</h2>
 
-            <div className="search-results">
-              {books?.map((book) => (
-                <BookCard key={book.id} {...book} />
-              ))}
-            </div>
+            <div className="search-results">{renderFilteredBooks()}</div>
           </div>
         )}
 

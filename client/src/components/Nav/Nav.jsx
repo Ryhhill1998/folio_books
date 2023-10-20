@@ -11,6 +11,8 @@ const Nav = () => {
   const activateSearch = useSearchStore((store) => store.activateSearch);
   const deactivateSearch = useSearchStore((store) => store.deactivateSearch);
   const searchIsActive = useSearchStore((store) => store.active);
+  const searchQuery = useSearchStore((store) => store.query);
+  const setSearchQuery = useSearchStore((store) => store.setSearchQuery);
 
   return (
     <nav className="navigation container">
@@ -26,7 +28,13 @@ const Nav = () => {
             <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
           </button>
 
-          <input type="search" placeholder="search" onFocus={activateSearch} />
+          <input
+            type="search"
+            placeholder="search"
+            value={searchQuery}
+            onChange={({ target }) => setSearchQuery(target.value)}
+            onFocus={activateSearch}
+          />
         </div>
 
         {!searchIsActive && (
