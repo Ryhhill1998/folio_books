@@ -3,10 +3,11 @@ CREATE DATABASE ecommerce_db;
 USE ecommerce_db;
 
 CREATE TABLE book(
-	id int auto_increment,
-    author varchar(255),
+	id varchar(255),
     title varchar(255),
-    image_src tinytext,
+    author varchar(255),
+    genre varchar(255),
+    image_src varchar(255),
 	stars float,
 	price decimal(6, 2),
 	stock_quantity int,
@@ -41,7 +42,7 @@ CREATE TABLE customer_order(
 CREATE TABLE order_line(
 	id int,
     order_id int,
-    book_id int,
+    book_id varchar(255),
     quantity int,
     price_per_book decimal(6, 2),
     PRIMARY KEY (id),
