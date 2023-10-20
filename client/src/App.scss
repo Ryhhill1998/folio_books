@@ -14,7 +14,7 @@ main {
 
 .books-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2em;
+  flex-wrap: nowrap;
+  gap: 1em;
+  overflow-x: auto;
 }

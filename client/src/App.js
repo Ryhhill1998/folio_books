@@ -19,28 +19,44 @@ const App = () => {
       </header>
 
       <main>
-        <div className="books-container container">
-          {books["romance"]?.slice(0, 10)?.map((book) => (
-            <BookCard key={book.id} {...book} />
-          ))}
+        <div className="genre-container container">
+          <h2>Romance</h2>
+
+          <div className="books-container">
+            {books["romance"]?.slice(0, 10)?.map((book) => (
+              <BookCard key={book.id} {...book} />
+            ))}
+          </div>
         </div>
 
-        <div className="books-container container">
-          {books["crime_mystery_thriller"]?.slice(0, 10)?.map((book) => (
-            <BookCard key={book.id} {...book} />
-          ))}
+        <div className="genre-container container">
+          <h2>Crime, Mystery and Thriller</h2>
+
+          <div className="books-container">
+            {books["crime_mystery_thriller"]?.slice(0, 10)?.map((book) => (
+              <BookCard key={book.id} {...book} />
+            ))}
+          </div>
         </div>
 
-        <div className="books-container container">
-          {books["science_fiction"]?.slice(0, 10)?.map((book) => (
-            <BookCard key={book.id} {...book} />
-          ))}
+        <div className="genre-container container">
+          <h2>Science Fiction</h2>
+
+          <div className="books-container">
+            {books["science_fiction"]?.slice(0, 10)?.map((book) => (
+              <BookCard key={book.id} {...book} />
+            ))}
+          </div>
         </div>
 
-        <div className="books-container container">
-          {books["graphic_novels"]?.slice(0, 10)?.map((book) => (
-            <BookCard key={book.id} {...book} />
-          ))}
+        <div className="genre-container container">
+          <h2>Graphic Novels</h2>
+
+          <div className="books-container">
+            {books["graphic_novels"]?.slice(0, 10)?.map((book) => (
+              <BookCard key={book.id} {...book} />
+            ))}
+          </div>
         </div>
       </main>
     </div>
