@@ -17,15 +17,18 @@ const App = () => {
   const searchIsActive = useSearchStore((store) => store.active);
   const searchQuery = useSearchStore((store) => store.query);
 
+  const stringContainsQueryString = (string, queryString) =>
+    string?.toLowerCase()?.includes(queryString.toLowerCase());
+
   const renderFilteredBooks = () => {
     const filteredBooks = books.filter((book) => {
       const { title, author, genre } = book;
 
       return (
         !searchQuery ||
-        title?.toLowerCase()?.includes(searchQuery.toLowerCase()) ||
-        author?.toLowerCase()?.includes(searchQuery.toLowerCase()) ||
-        genre?.toLowerCase()?.includes(searchQuery.toLowerCase())
+        stringContainsQueryString(title, searchQuery) ||
+        stringContainsQueryString(author, searchQuery) ||
+        stringContainsQueryString(genre, searchQuery)
       );
     });
 
