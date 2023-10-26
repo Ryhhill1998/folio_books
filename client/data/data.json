@@ -17,12 +17,6 @@
       "displayName": "Vic",
       "email": "vic@mail.com",
       "password": "123456"
-    },
-    {
-      "id": "4",
-      "displayName": "Barry",
-      "email": "barry@mail.com",
-      "password": "123456"
     }
   ]
 }

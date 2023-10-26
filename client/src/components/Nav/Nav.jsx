@@ -15,6 +15,7 @@ const Nav = () => {
   const searchQuery = useSearchStore((store) => store.query);
   const setSearchQuery = useSearchStore((store) => store.setSearchQuery);
   const signedIn = useProfileStore((store) => store.signedIn);
+  const signOut = useProfileStore((store) => store.signOutUser);
 
   return (
     <nav className="navigation container">
@@ -45,6 +46,8 @@ const Nav = () => {
               <FontAwesomeIcon icon={faCartShopping} className="icon" />
             </button>
           )}
+
+          {!searchIsActive && <button onClick={signOut}>Logout</button>}
 
           {searchIsActive && <button onClick={deactivateSearch}>Cancel</button>}
         </div>
