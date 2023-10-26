@@ -1,0 +1,59 @@
+.auth-container {
+  display: flex;
+  gap: 2em;
+  color: white;
+
+  p {
+    align-self: center;
+    font-weight: var(--font-weight-bold-2);
+    font-size: 1.25rem;
+  }
+
+  .form-container {
+    width: 40%;
+    margin: var(--margin-align-center);
+    padding: 2em;
+
+    h2 {
+      color: white;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5em;
+      width: 100%;
+
+      input {
+        border: none;
+        background: none;
+        border-bottom: dashed 2px white;
+        padding: 0.5em;
+        width: 95%;
+        color: white;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+            color: white;
+        }
+      }
+
+      button {
+        width: 100%;
+        border: none;
+        padding: 0.75em;
+        border-radius: 4px;
+        font-weight: var(--font-weight-bold-2);
+        color: white;
+        background-color: var(--primary-theme);
+      }
+    }
+  }
+}
