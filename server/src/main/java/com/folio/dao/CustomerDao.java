@@ -70,6 +70,21 @@ public class CustomerDao {
         }
     }
 
+    public Customer getCustomerByEmail(String email_address) throws SQLException {
+        String sql = "SELECT * FROM customer WHERE email_address = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(4, email_address);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return mapResultSetToCustomer(resultSet);
+                }
+                return null; // Customer not found
+            }
+        }
+    }
+
     public List<Customer> getAllCustomers() throws SQLException {
         List<Customer> customers = new ArrayList<>();
         String sql = "SELECT * FROM customer";
