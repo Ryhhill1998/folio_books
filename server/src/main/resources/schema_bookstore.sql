@@ -19,7 +19,7 @@ CREATE TABLE customer(
 	fname varchar(255),
     sname varchar(255),
     email_address varchar(255),
-    mobile_num int,
+    mobile_num varchar(15),
     fline_address varchar(255),
     sline_address varchar(255),
     city varchar(255),
