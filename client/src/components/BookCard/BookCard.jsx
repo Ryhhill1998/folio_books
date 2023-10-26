@@ -6,9 +6,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as emptyStarIcon } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
+import { useProfileStore } from "../../globalStores/profile";
 
 const BookCard = ({ id, title, image_src, author, stars, price }) => {
   const [hoveredId, setHoveredId] = useState(null);
+
+  const addBookToBasket = useProfileStore((store) => store.addBookToBasket);
 
   const renderStars = () => {
     const numberOfStars = stars ?? 0;
@@ -69,7 +72,14 @@ const BookCard = ({ id, title, image_src, author, stars, price }) => {
             <p>£{price}</p>
           </div>
 
-          <button className="add-button">Add to Basket</button>
+          <button
+            className="add-button"
+            onClick={() =>
+              addBookToBasket({ id, title, image_src, author, stars, price })
+            }
+          >
+            Add to Basket
+          </button>
         </div>
       )}
     </div>
