@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./RegisterScreen.scss";
 import { useProfileStore } from "../../../globalStores/profile";
 
@@ -10,6 +10,7 @@ const RegisterScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const registerUser = useProfileStore((store) => store.registerUser);
+  const error = useProfileStore((store) => store.registerError);
 
   //   passing in the email from the user input and updating state
   const handleDisplayNameChange = (newDisplayName) => {
@@ -40,41 +41,43 @@ const RegisterScreen = () => {
   };
 
   return (
-      <div className="form-container">
-        <h2>Register for a new account</h2>
+    <div className="form-container">
+      <h2>Register for a new account</h2>
 
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Display name"
-            value={displayName}
-            onChange={({ target }) => handleDisplayNameChange(target.value)}
-          />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Display name"
+          value={displayName}
+          onChange={({ target }) => handleDisplayNameChange(target.value)}
+        />
 
-          <input
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={({ target }) => handleEmailChange(target.value)}
-          />
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={({ target }) => handleEmailChange(target.value)}
+        />
 
-          <input
-            type="text"
-            placeholder="Password"
-            value={password}
-            onChange={({ target }) => handlePasswordChange(target.value)}
-          />
+        <input
+          type="text"
+          placeholder="Password"
+          value={password}
+          onChange={({ target }) => handlePasswordChange(target.value)}
+        />
 
-          <input
-            type="text"
-            placeholder="Confirm password"
-            value={confirmPassword}
-            onChange={({ target }) => handleConfirmPasswordChange(target.value)}
-          />
+        <input
+          type="text"
+          placeholder="Confirm password"
+          value={confirmPassword}
+          onChange={({ target }) => handleConfirmPasswordChange(target.value)}
+        />
 
-          <button type="submit">Register</button>
-        </form>
-      </div>
+        {error && <p className="error-message">{error.message}</p>}
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
   );
 };
 

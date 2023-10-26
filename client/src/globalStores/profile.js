@@ -8,6 +8,8 @@ export const useProfileStore = create(
       displayName: null,
       email: null,
       signedIn: false,
+      loginError: null,
+      registerError: null,
       registerUser: async (displayName, email, password) => {
         try {
           const res = await fetch("http://localhost:8000/users");
@@ -31,8 +33,17 @@ export const useProfileStore = create(
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newUser),
           });
+
+          set({
+            id: newUser.id,
+            displayName: newUser.displayName,
+            email: newUser.email,
+            signedIn: true,
+            loginError: null,
+            registerError: null,
+          });
         } catch (error) {
-          console.error(error);
+          set({ registerError: error });
         }
       },
       signInUser: async (email, password) => {
@@ -50,17 +61,22 @@ export const useProfileStore = create(
               displayName: foundUser.displayName,
               email: foundUser.email,
               signedIn: true,
+              loginError: null,
+              registerError: null,
             });
           } else {
-            set({
-              id: null,
-              displayName: null,
-              email: null,
-              signedIn: false,
-            });
+            throw new Error(
+              "Invalid email or password. Try registering instead."
+            );
           }
         } catch (error) {
-          console.error(error);
+          set({
+            id: null,
+            displayName: null,
+            email: null,
+            signedIn: false,
+            loginError: error,
+          });
         }
       },
       signOutUser: () => {
@@ -69,8 +85,11 @@ export const useProfileStore = create(
           displayName: null,
           email: null,
           signedIn: false,
+          loginError: null,
+          registerError: null,
         });
       },
+      clearErrors: () => set({ loginError: null, registerError: null }),
     }),
     {
       name: "profile-data",

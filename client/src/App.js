@@ -12,6 +12,9 @@ import HomePage from "./HomePage/HomePage";
 
 const App = () => {
   const signedIn = useProfileStore((store) => store.signedIn);
+  const clearErrors = useProfileStore((store) => store.clearErrors);
+
+  useEffect(() => clearErrors(), []);
 
   return (
     <div className="App">
@@ -25,8 +28,8 @@ const App = () => {
 
       <main>
         {!signedIn && <Auth />}
-        
-        {signedIn && <HomePage/>}
+
+        {signedIn && <HomePage />}
       </main>
     </div>
   );

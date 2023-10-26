@@ -17,6 +17,18 @@
       "displayName": "Vic",
       "email": "vic@mail.com",
       "password": "123456"
+    },
+    {
+      "id": "4",
+      "displayName": "blue",
+      "email": "blue@mail.com",
+      "password": "123456"
+    },
+    {
+      "id": "5",
+      "displayName": "eddie",
+      "email": "eddie@mail.com",
+      "password": "123456"
     }
   ]
 }

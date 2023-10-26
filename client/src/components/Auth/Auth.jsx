@@ -7,7 +7,7 @@ const Auth = () => {
     <div className="auth-container">
       <LoginScreen />
 
-      <p>OR</p>
+      <p className="or-connector">OR</p>
 
       <RegisterScreen />
     </div>

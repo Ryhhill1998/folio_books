@@ -8,6 +8,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
 
   const signInUser = useProfileStore((store) => store.signInUser);
+  const error = useProfileStore((store) => store.loginError);
 
   //   passing in the email from the user input and updating state
   const handleEmailChange = (newEmail) => {
@@ -45,6 +46,8 @@ const LoginScreen = () => {
           value={password}
           onChange={(event) => handlePasswordChange(event.target.value)}
         />
+
+        {error && <p className="error-message">{error.message}</p>}
 
         <button type="submit">Login</button>
       </form>

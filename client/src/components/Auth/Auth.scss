@@ -2,8 +2,9 @@
   display: flex;
   gap: 2em;
   color: white;
+  text-align: center;
 
-  p {
+  .or-connector {
     align-self: center;
     font-weight: var(--font-weight-bold-2);
     font-size: 1.25rem;
@@ -17,7 +18,6 @@
     h2 {
       color: white;
       margin-bottom: 1em;
-      text-align: center;
     }
 
     form {
@@ -41,8 +41,14 @@
         }
 
         &::placeholder {
-            color: white;
+          color: white;
         }
+      }
+
+      .error-message {
+        color: rgb(194, 14, 14);
+        font-size: 0.8rem;
+        font-weight: var(--font-weight-bold-1);
       }
 
       button {
