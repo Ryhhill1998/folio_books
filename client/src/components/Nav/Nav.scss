@@ -47,6 +47,8 @@
         .icon {
           color: var(--secondary-theme);
         }
+
+       
       }
     }
 
@@ -55,6 +57,10 @@
       background: none;
       color: white;
       font-weight: var(--font-weight-bold-1);
+
+      &:hover {
+        color: var(--primary-theme);
+      }
 
       .icon {
         font-size: 1.1rem;
