@@ -3,11 +3,8 @@ import { persist } from "zustand/middleware";
 
 export const useProfileStore = create(
   persist(
-    (set) => ({
-      id: null,
-      displayName: null,
-      email: null,
-      signedIn: false,
+    (set, get) => ({
+      user: null,
       loginError: null,
       registerError: null,
       registerUser: async (displayName, email, password) => {
@@ -35,15 +32,18 @@ export const useProfileStore = create(
           });
 
           set({
-            id: newUser.id,
-            displayName: newUser.displayName,
-            email: newUser.email,
+            user: newUser,
             signedIn: true,
             loginError: null,
             registerError: null,
           });
         } catch (error) {
-          set({ registerError: error });
+          set({
+            user: null,
+            signedIn: false,
+            loginError: null,
+            registerError: error,
+          });
         }
       },
       signInUser: async (email, password) => {
@@ -57,9 +57,7 @@ export const useProfileStore = create(
 
           if (foundUser) {
             set({
-              id: foundUser.id,
-              displayName: foundUser.displayName,
-              email: foundUser.email,
+              user: foundUser,
               signedIn: true,
               loginError: null,
               registerError: null,
@@ -71,19 +69,25 @@ export const useProfileStore = create(
           }
         } catch (error) {
           set({
-            id: null,
-            displayName: null,
-            email: null,
+            user: null,
             signedIn: false,
             loginError: error,
+            registerError: null,
           });
         }
       },
+      addBookToBasket: (book) => {
+        const user = get().user;
+        const { basket } = user;
+        const updatedBasket = [...basket, book];
+        user.basket = updatedBasket;
+        console.log({user});
+
+        set({ user });
+      },
       signOutUser: () => {
         set({
-          id: null,
-          displayName: null,
-          email: null,
+          user: null,
           signedIn: false,
           loginError: null,
           registerError: null,
