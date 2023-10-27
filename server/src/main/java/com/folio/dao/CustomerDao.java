@@ -144,4 +144,20 @@ public class CustomerDao {
         customer.setCvv(resultSet.getString("cvv"));
         return customer;
     }
+
+    public Customer authenticateCustomer(String email_address, String password) throws SQLException {
+        String sql = "SELECT * FROM customer WHERE email_address = ? AND password = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, email_address);
+            statement.setString(2, password);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return mapResultSetToCustomer(resultSet);
+                }
+                return null; // Customer not found or incorrect credentials
+            }
+        }
+    }
 }
