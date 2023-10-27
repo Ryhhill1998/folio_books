@@ -20,32 +20,36 @@ public class CustomerDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void createCustomer(Customer customer) {
+    public void createCustomer(String fname, String sname, String email_address, String password_) {
         // Validate email format
-        String email = customer.getEmail_address();
-        if (email == null || !email.contains("@")) {
+        if (email_address == null || !email_address.contains("@")) {
             throw new IllegalArgumentException("Invalid email format");
         }
-
+    
         // Check for empty fields
-        if (customer.getFname() == null || customer.getFname().isEmpty()) {
+        if (fname == null || fname.isEmpty()) {
             throw new IllegalArgumentException("First name is required");
         }
-
-        if (customer.getSname() == null || customer.getSname().isEmpty()) {
+    
+        if (sname == null || sname.isEmpty()) {
             throw new IllegalArgumentException("Last name is required");
         }
-
+    
         // Fetch the max customer ID and increment by 1 to create the new ID
-        int lastCustomerId = getLastCustomerId();
-        int newCustomerId = lastCustomerId + 1;
-
+        int lastCustomerId;
+        try {
+            lastCustomerId = getLastCustomerId();
+        } catch (EmptyResultDataAccessException e) {
+            // Handle the case when there are no existing customers
+            lastCustomerId = 0;
+        }
+    
+        int newCustomerId = ++lastCustomerId;
+    
         String sql = "INSERT INTO customer (id, fname, sname, email_address, fline_address, sline_address, city, post_code, password, card_num, cvv) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, newCustomerId, customer.getFname(), customer.getSname(),
-                email, customer.getFline_address(), customer.getSline_address(),
-                customer.getCity(), customer.getPost_code(), customer.getPassword(),
-                customer.getCard_num(), customer.getCvv());
+        
+        jdbcTemplate.update(sql, newCustomerId, fname, sname, email_address, null, null, null, null, password_, null, null);
     }
 
     private int getLastCustomerId() {

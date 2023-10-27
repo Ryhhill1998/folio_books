@@ -6,6 +6,7 @@ import com.folio.dao.OrderLineDao;
 import com.folio.model.Customer;
 import com.folio.model.OrderLine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -34,9 +35,9 @@ public class CustomerController {
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<Map<String, Object>> signInCustomer(@RequestParam String email_address, @RequestParam String password) {
+    public ResponseEntity<Map<String, Object>> signInCustomer(@RequestParam String email, @RequestParam String password) {
         try {
-            Customer authenticatedCustomer = customerDao.authenticateCustomer(email_address, password);
+            Customer authenticatedCustomer = customerDao.authenticateCustomer(email, password);
 
             if (authenticatedCustomer != null) {
                 List<OrderLine> basketOrderLines = orderLineDao.getBasket(authenticatedCustomer.getId());
@@ -68,13 +69,20 @@ public class CustomerController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerCustomer(@Validated @RequestBody Customer customer) {
+    public ResponseEntity<String> registerCustomer(@Validated @RequestParam String forename, @RequestParam String surname, @RequestParam String email, @RequestParam String password) {
         // Registration logic
         try {
-            customerDao.createCustomer(customer); // Create Customer method call
+            Customer customer = new Customer();
+            customer.setFname(forename);
+            customer.setSname(surname);
+            customer.setEmail_address(email);
+            customer.setPassword(password);
+            customerDao.createCustomer(forename, surname, email, password); // Create Customer method call
             return ResponseEntity.ok("Registration successful");
-        } catch (Exception e) {
+        } catch (DuplicateKeyException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already registered");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Registration failed");
         }
     }
 }
