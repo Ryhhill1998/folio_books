@@ -8,7 +8,7 @@ public class Book {
     String author;
     String genre;
     String image_src;
-    String stars;
+    float stars;
     BigDecimal price;
     int stock_quantity;
 
@@ -52,11 +52,11 @@ public class Book {
         this.image_src = image_src;
     }
 
-    public String getStars() {
+    public float getStars() {
         return stars;
     }
 
-    public void setStars(String stars) {
+    public void setStars(float stars) {
         this.stars = stars;
     }
 
