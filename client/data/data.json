@@ -8,10 +8,11 @@
       "basket": [
         {
           "id": "d36cec23-322e-43cd-9497-8c435cf735e3",
+          "price": 0.99,
+          "quantity": 1,
           "title": "Things We Left Behind: the heart-pounding new book from the bestselling author of Things We Never Got Over (Knockemout Series)",
           "author": "Lucy Score",
           "image_src": "https://www.whsmith.co.uk/mobify/caching/assets/product-image/large/9781399713795.jpg",
-          "price": 14.99,
           "stars": 3.5,
           "genre": "romance"
         },
