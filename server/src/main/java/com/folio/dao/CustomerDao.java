@@ -21,16 +21,31 @@ public class CustomerDao {
     }
 
     public void createCustomer(Customer customer) {
+        // Validate email format
+        String email = customer.getEmail_address();
+        if (email == null || !email.contains("@")) {
+            throw new IllegalArgumentException("Invalid email format");
+        }
+
+        // Check for empty fields
+        if (customer.getFname() == null || customer.getFname().isEmpty()) {
+            throw new IllegalArgumentException("First name is required");
+        }
+
+        if (customer.getSname() == null || customer.getSname().isEmpty()) {
+            throw new IllegalArgumentException("Last name is required");
+        }
+
         // Fetch the max customer ID and increment by 1 to create the new ID
         int lastCustomerId = getLastCustomerId();
         int newCustomerId = lastCustomerId + 1;
 
-        String sql = "INSERT INTO customer (id, fname, sname, email_address, fline_address, sline_address, city, post_code, password_, card_num, cvv) " +
+        String sql = "INSERT INTO customer (id, fname, sname, email_address, fline_address, sline_address, city, post_code, password, card_num, cvv) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, newCustomerId, customer.getFname(), customer.getSname(),
-                customer.getEmail_address(), customer.getFline_address(), customer.getSline_address(),
-                customer.getCity(), customer.getPost_code(), customer.getPassword(), customer.getCard_num(),
-                customer.getCvv());
+                email, customer.getFline_address(), customer.getSline_address(),
+                customer.getCity(), customer.getPost_code(), customer.getPassword(),
+                customer.getCard_num(), customer.getCvv());
     }
 
     private int getLastCustomerId() {

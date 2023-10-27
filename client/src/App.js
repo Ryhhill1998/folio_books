@@ -11,17 +11,10 @@ const App = () => {
 
   useEffect(() => clearErrors(), []);
 
-  const params = {
-    method: 'GET',
-    headers: {
-        'accept': 'application/json'
-    }
-  };
-
-  const fetchData = () =>
-
   useEffect(() => {
-    fetch("http://localhost:8080/get", params)
+    fetch("http://localhost:8080/get")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   }, []);
 
   return (

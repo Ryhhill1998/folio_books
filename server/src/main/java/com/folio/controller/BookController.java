@@ -26,7 +26,7 @@ public class BookController {
         try {
             List<Book> books = bookDao.getAllBooks(); 
             return ResponseEntity.ok(books); //gives an ok status (HTTPS 200)
-        } catch (SQLException e) {
+        } catch (Exception e) {
             // Handle the exception, e.g., log the error
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
