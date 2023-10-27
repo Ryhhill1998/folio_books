@@ -15,10 +15,6 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* <p>{signedIn ? "Signed in" : "Signed out"}</p>
-      {displayName && <p>As {displayName}</p>}
-      <button onClick={signOut}>Sign out</button> */}
-
       <header>
         <Nav />
       </header>

@@ -9,6 +9,7 @@ export const useProfileStore = create(
       registerError: null,
       registerUser: async (forename, surname, email, password) => {
         try {
+          console.log("registering new user");
           const newUser = { forename, surname, email, password };
 
           const response = await fetch("http://localhost:8080/register", {
@@ -16,6 +17,8 @@ export const useProfileStore = create(
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newUser),
           });
+
+          console.log(response);
 
           if (response.status === 200) {
             set({
@@ -25,7 +28,7 @@ export const useProfileStore = create(
               registerError: null,
             });
           } else {
-            const message = response.json();
+            const message = await response.json();
 
             set({
               user: null,

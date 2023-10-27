@@ -25,16 +25,16 @@ public class CustomerDao {
         if (email_address == null || !email_address.contains("@")) {
             throw new IllegalArgumentException("Invalid email format");
         }
-    
+
         // Check for empty fields
         if (fname == null || fname.isEmpty()) {
             throw new IllegalArgumentException("First name is required");
         }
-    
+
         if (sname == null || sname.isEmpty()) {
             throw new IllegalArgumentException("Last name is required");
         }
-    
+
         // Fetch the max customer ID and increment by 1 to create the new ID
         int lastCustomerId;
         try {
@@ -43,13 +43,15 @@ public class CustomerDao {
             // Handle the case when there are no existing customers
             lastCustomerId = 0;
         }
-    
+
         int newCustomerId = ++lastCustomerId;
-    
-        String sql = "INSERT INTO customer (id, fname, sname, email_address, fline_address, sline_address, city, post_code, password, card_num, cvv) " +
+
+        String sql = "INSERT INTO customer (id, fname, sname, email_address, fline_address, sline_address, city, post_code, password_, card_num, cvv) "
+                +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        jdbcTemplate.update(sql, newCustomerId, fname, sname, email_address, null, null, null, null, password_, null, null);
+
+        jdbcTemplate.update(sql, newCustomerId, fname, sname, email_address, null, null, null, null, password_, null,
+                null);
     }
 
     private int getLastCustomerId() {
@@ -94,7 +96,7 @@ public class CustomerDao {
 
     public Customer authenticateCustomer(String email_address, String password) {
         String sql = "SELECT * FROM customer WHERE email_address = ? AND password_ = ?";
-        
+
         try {
             return jdbcTemplate.queryForObject(sql, new CustomerMapper(), email_address, password);
         } catch (EmptyResultDataAccessException ex) {

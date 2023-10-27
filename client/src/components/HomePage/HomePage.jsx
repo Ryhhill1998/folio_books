@@ -34,7 +34,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8000/books")
+    fetch("http://localhost:8080/get-books")
       .then((response) => response.json())
       .then((books) => {
         setBooks(books);
