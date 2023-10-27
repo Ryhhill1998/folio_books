@@ -7,36 +7,33 @@ export const useProfileStore = create(
       user: null,
       loginError: null,
       registerError: null,
-      registerUser: async (displayName, email, password) => {
+      registerUser: async (forename, surname, email, password) => {
         try {
-          const res = await fetch("http://localhost:8000/users");
-          const users = await res.json();
+          const newUser = { forename, surname, email, password };
 
-          const foundUserWithEmail = users.find((user) => user.email === email);
-
-          if (foundUserWithEmail) {
-            throw new Error("A user already exists with that email.");
-          }
-
-          const newUser = {
-            id: users.length + 1 + "",
-            displayName,
-            email,
-            password,
-          };
-
-          fetch("http://localhost:8000/users", {
+          const response = await fetch("http://localhost:8080/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newUser),
           });
 
-          set({
-            user: newUser,
-            signedIn: true,
-            loginError: null,
-            registerError: null,
-          });
+          if (response.status === 200) {
+            set({
+              user: newUser,
+              signedIn: true,
+              loginError: null,
+              registerError: null,
+            });
+          } else {
+            const message = response.json();
+
+            set({
+              user: null,
+              signedIn: false,
+              loginError: null,
+              registerError: message,
+            });
+          }
         } catch (error) {
           set({
             user: null,
@@ -81,7 +78,7 @@ export const useProfileStore = create(
         const { basket } = user;
         const updatedBasket = [...basket, book];
         user.basket = updatedBasket;
-        console.log({user});
+        console.log({ user });
 
         set({ user });
       },

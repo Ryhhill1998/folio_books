@@ -1,4 +1,4 @@
-DROP DATABASE ecommerce_db;
+DROP DATABASE IF EXISTS ecommerce_db;
 CREATE DATABASE ecommerce_db;
 USE ecommerce_db;
 
@@ -39,7 +39,7 @@ CREATE TABLE customer_order(
 );
 
 CREATE TABLE order_line(
-	id int,
+	id int auto_increment,
     order_id int,
     book_id varchar(255),
     quantity int,

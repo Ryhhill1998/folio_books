@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./RegisterScreen.scss";
 import { useProfileStore } from "../../../globalStores/profile";
 
 const RegisterScreen = () => {
   // const [name of variable, name of function to set variable value] = useState(default value);
-  const [displayName, setDisplayName] = useState("");
+  const [forename, setForename] = useState("");
+  const [surname, setSurname] = useState("");
   const [email, setEmail] = useState(""); // state creates a new variable and a method to update the variable
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -12,10 +13,14 @@ const RegisterScreen = () => {
   const registerUser = useProfileStore((store) => store.registerUser);
   const error = useProfileStore((store) => store.registerError);
 
-  //   passing in the email from the user input and updating state
-  const handleDisplayNameChange = (newDisplayName) => {
+  const handleForenameChange = (newForename) => {
     // validate display name check
-    setDisplayName(newDisplayName);
+    setForename(newForename);
+  };
+
+  const handleSurnameChange = (newSurname) => {
+    // validate display name check
+    setSurname(newSurname);
   };
 
   const handleEmailChange = (newEmail) => {
@@ -37,7 +42,7 @@ const RegisterScreen = () => {
     event.preventDefault();
     // pass email and password to backend for verification
     // post request to send email and password
-    await registerUser(displayName, email, password);
+    await registerUser(forename, surname, email, password);
   };
 
   return (
@@ -47,9 +52,16 @@ const RegisterScreen = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Display name"
-          value={displayName}
-          onChange={({ target }) => handleDisplayNameChange(target.value)}
+          placeholder="Forename"
+          value={forename}
+          onChange={({ target }) => handleForenameChange(target.value)}
+        />
+
+        <input
+          type="text"
+          placeholder="Surname"
+          value={surname}
+          onChange={({ target }) => handleSurnameChange(target.value)}
         />
 
         <input
