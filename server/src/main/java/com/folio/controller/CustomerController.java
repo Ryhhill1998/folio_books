@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @CrossOrigin
-@RestController //should be sent back as JSON
+@RestController // should be sent back as JSON
 public class CustomerController {
 
     @Autowired
@@ -35,7 +35,8 @@ public class CustomerController {
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<Map<String, Object>> signInCustomer(@RequestParam String email, @RequestParam String password) {
+    public ResponseEntity<Map<String, Object>> signInCustomer(@RequestParam String email,
+            @RequestParam String password) {
         try {
             Customer authenticatedCustomer = customerDao.authenticateCustomer(email, password);
 
@@ -63,21 +64,15 @@ public class CustomerController {
                         .body(Collections.singletonMap("error", "Sign-in failed"));
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "Sign-in failed"));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.singletonMap("error", "Sign-in failed"));
         }
     }
 
-
     @PostMapping("/register")
-    public ResponseEntity<String> registerCustomer(@Validated @RequestParam String forename, @RequestParam String surname, @RequestParam String email, @RequestParam String password) {
-        // Registration logic
+    public ResponseEntity<String> registerCustomer(@RequestBody CustomerMap customer) {
         try {
-            Customer customer = new Customer();
-            customer.setFname(forename);
-            customer.setSname(surname);
-            customer.setEmail_address(email);
-            customer.setPassword(password);
-            customerDao.createCustomer(forename, surname, email, password); // Create Customer method call
+            customerDao.createCustomer(customer);
             return ResponseEntity.ok("Registration successful");
         } catch (DuplicateKeyException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already registered");
@@ -86,6 +81,3 @@ public class CustomerController {
         }
     }
 }
-
-
-    

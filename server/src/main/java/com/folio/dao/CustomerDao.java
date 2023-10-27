@@ -1,5 +1,6 @@
 package com.folio.dao;
 
+import com.folio.controller.CustomerMap;
 import com.folio.model.Customer;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,8 +21,13 @@ public class CustomerDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void createCustomer(String fname, String sname, String email_address, String password_) {
+    public void createCustomer(CustomerMap customer) {
         // Validate email format
+        String fname = customer.forename;
+        String sname = customer.surname;
+        String email_address = customer.email;
+        String password_ = customer.password;
+
         if (email_address == null || !email_address.contains("@")) {
             throw new IllegalArgumentException("Invalid email format");
         }
