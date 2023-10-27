@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 import Nav from "./components/Nav/Nav";
 import { useProfileStore } from "./globalStores/profile";
@@ -6,16 +6,12 @@ import Auth from "./components/Auth/Auth";
 import HomePage from "./components/HomePage/HomePage";
 
 const App = () => {
+  const [showCheckout, setShowCheckout] = useState(false);
+
   const signedIn = useProfileStore((store) => store.signedIn);
   const clearErrors = useProfileStore((store) => store.clearErrors);
 
   useEffect(() => clearErrors(), []);
-
-  useEffect(() => {
-    fetch("http://localhost:8080/get")
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }, []);
 
   return (
     <div className="App">
