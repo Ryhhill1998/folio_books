@@ -4,19 +4,13 @@ import com.folio.dao.CustomerDao;
 import com.folio.dao.CustomerOrderDao;
 import com.folio.dao.OrderLineDao;
 import com.folio.model.Customer;
-import com.folio.model.CustomerOrder;
 import com.folio.model.OrderLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
- 
+import org.springframework.web.bind.annotation.*;
+
 import java.util.*;
 
 @CrossOrigin
@@ -35,7 +29,7 @@ public class CustomerController {
     @GetMapping("/get")
     public ResponseEntity<String> getTestJson() {
         String jsonResponse = "{\"message\": \"This is a test JSON response.\"}";
-        
+
         return ResponseEntity.ok(jsonResponse);
     }
 
@@ -61,11 +55,11 @@ public class CustomerController {
                 response.put("books", books);
 
                 return ResponseEntity.ok(response);
-                
+
             } else {
                 return ResponseEntity
-                            .status(HttpStatus.UNAUTHORIZED)
-                            .body(Collections.singletonMap("error", "Sign-in failed"));
+                        .status(HttpStatus.UNAUTHORIZED)
+                        .body(Collections.singletonMap("error", "Sign-in failed"));
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "Sign-in failed"));
@@ -74,21 +68,16 @@ public class CustomerController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerCustomer(@Validated @RequestBody Customer customer) { 
-        // method needs updating - will not take full customer object but just Name, email, 
-        // will be @RequestParam as above
-
-        //Maps data to customer object and adds validation NotNull etc
+    public ResponseEntity<String> registerCustomer(@Validated @RequestBody Customer customer) {
         // Registration logic
-        try { //try catch block to track errors
-            customerDao.createCustomer(customer); //Create Customer method call
-            return ResponseEntity.ok("Registration successful"); 
+        try {
+            customerDao.createCustomer(customer); // Create Customer method call
+            return ResponseEntity.ok("Registration successful");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Registration failed");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already registered");
         }
     }
-
-
 }
+
 
     

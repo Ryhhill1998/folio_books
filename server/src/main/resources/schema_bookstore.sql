@@ -1,7 +1,6 @@
 DROP DATABASE IF EXISTS ecommerce_db;
 CREATE DATABASE ecommerce_db;
 USE ecommerce_db;
-
 CREATE TABLE book(
 	id varchar(255),
     title varchar(255),
