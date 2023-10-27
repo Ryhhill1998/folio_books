@@ -15,11 +15,11 @@ CREATE TABLE book(
 );
 
 CREATE TABLE customer(
-	id int,
+	id int auto_increment,
 	fname varchar(255),
     sname varchar(255),
-    email_address varchar(255),
-    mobile_num int,
+    email_address varchar(255) UNIQUE,
+    mobile_num varchar(15),
     fline_address varchar(255),
     sline_address varchar(255),
     city varchar(255),
@@ -31,9 +31,8 @@ CREATE TABLE customer(
 );
 
 CREATE TABLE customer_order(
-	id int,
+	id int auto_increment,
     customer_id int,
-    date_ date,
     status_ varchar(55),
 	PRIMARY KEY (id),
 	FOREIGN KEY (id) REFERENCES customer(id)
@@ -49,6 +48,4 @@ CREATE TABLE order_line(
     FOREIGN KEY (book_id) REFERENCES book(id),
     FOREIGN KEY (order_id) REFERENCES customer_order(id)
 );
-
-
 

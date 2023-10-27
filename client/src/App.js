@@ -13,6 +13,19 @@ const App = () => {
 
   useEffect(() => clearErrors(), []);
 
+  const params = {
+    method: 'GET',
+    headers: {
+        'accept': 'application/json'
+    }
+  };
+
+  const fetchData = () =>
+
+  useEffect(() => {
+    fetch("http://localhost:8080/get", params)
+  }, []);
+
   return (
     <div className="App">
       {/* <p>{signedIn ? "Signed in" : "Signed out"}</p>
