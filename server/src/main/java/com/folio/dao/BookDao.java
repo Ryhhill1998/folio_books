@@ -19,10 +19,10 @@ public class BookDao {
     }
 
     public void createBook(Book book) {
-        String sql = "INSERT INTO book (id, title, author, genre, image_src, stars, price, stock_quantity) " +
+        String sql = "INSERT INTO book (id, title, author, genre, imageSrc, stars, price, stockQuantity) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(),
-                book.getImage_src(), book.getStars(), book.getPrice(), book.getStock_quantity());
+                book.getImageSrc(), book.getStars(), book.getPrice(), book.getStockQuantity());
     }
 
     public Book getBookById(String id) {
@@ -41,10 +41,10 @@ public class BookDao {
     }
 
     public void updateBook(Book book) {
-        String sql = "UPDATE book SET title = ?, author = ?, genre = ?, image_src = ?, stars = ?, price = ?, stock_quantity = ? " +
+        String sql = "UPDATE book SET title = ?, author = ?, genre = ?, image_src = ?, stars = ?, price = ?, stockQuantity = ? " +
                 "WHERE id = ?";
-        jdbcTemplate.update(sql, book.getTitle(), book.getAuthor(), book.getGenre(), book.getImage_src(),
-                book.getStars(), book.getPrice(), book.getStock_quantity(), book.getId());
+        jdbcTemplate.update(sql, book.getTitle(), book.getAuthor(), book.getGenre(), book.getImageSrc(),
+                book.getStars(), book.getPrice(), book.getStockQuantity(), book.getId());
     }
 
     public void deleteBook(String id) {
@@ -60,10 +60,10 @@ public class BookDao {
             book.setTitle(resultSet.getString("title"));
             book.setAuthor(resultSet.getString("author"));
             book.setGenre(resultSet.getString("genre"));
-            book.setImage_src(resultSet.getString("image_src"));
+            book.setImageSrc(resultSet.getString("imageSrc"));
             book.setStars(resultSet.getFloat("stars"));
             book.setPrice(resultSet.getBigDecimal("price"));
-            book.setStock_quantity(resultSet.getInt("stock_quantity"));
+            book.setStockQuantity(resultSet.getInt("stockQuantity"));
             return book;
         }
     }
