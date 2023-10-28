@@ -2,7 +2,7 @@ package com.folio.model;
 
 public class CustomerOrder {
     int id;
-    int customer_id;
+    int customerId;
     String status_;
 
     public int getId() {
@@ -13,12 +13,12 @@ public class CustomerOrder {
         this.id = id;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomer_id(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getStatus_() {

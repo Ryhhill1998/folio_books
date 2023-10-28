@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 
 public class OrderLine {
     int id;
-    int order_id;
-    String book_id;
+    int orderId;
+    String bookId;
     int quantity;
-    BigDecimal price_per_book;
+    BigDecimal pricePerBook;
 
     public int getId() {
         return id;
@@ -17,20 +17,20 @@ public class OrderLine {
         this.id = id;
     }
 
-    public int getOrder_id() {
-        return order_id;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
-    public String getBook_id() {
-        return book_id;
+    public String getBookId() {
+        return bookId;
     }
 
-    public void setBook_id(String book_id) {
-        this.book_id = book_id;
+    public void setBook_id(String bookId) {
+        this.bookId = bookId;
     }
 
     public int getQuantity() {
@@ -41,11 +41,11 @@ public class OrderLine {
         this.quantity = quantity;
     }
 
-    public BigDecimal getPrice_per_book() {
-        return price_per_book;
+    public BigDecimal getPricePerBook() {
+        return pricePerBook;
     }
 
-    public void setPrice_per_book(BigDecimal price_per_book) {
-        this.price_per_book = price_per_book;
+    public void setPricePerBook(BigDecimal pricePerBook) {
+        this.pricePerBook = pricePerBook;
     }
 }

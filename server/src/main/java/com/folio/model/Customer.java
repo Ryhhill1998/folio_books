@@ -2,16 +2,10 @@ package com.folio.model;
 
 public class Customer {
     int id;
-    String fname;
-    String sname;
-    String email_address;
-    String fline_address;
-    String sline_address;
-    String city;
-    String post_code;
-    String password;
-    String card_num;
-    String cvv;
+    String forename;
+    String surname;
+    String email;
+    String password_;
 
     public int getId() {
         return id;
@@ -21,83 +15,35 @@ public class Customer {
         this.id = id;
     }
 
-    public String getFname() {
-        return fname;
+    public String getForename() {
+        return forename;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
+    public void setForename(String forename) {
+        this.forename = forename;
     }
 
-    public String getSname() {
-        return sname;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSname(String sname) {
-        this.sname = sname;
+    public void setSname(String surname) {
+        this.surname = surname;
     }
 
-    public String getEmail_address() {
-        return email_address;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmail_address(String email_address) {
-        this.email_address = email_address;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getFline_address() {
-        return fline_address;
+    public String getPassword_() {
+        return password_;
     }
 
-    public void setFline_address(String fline_address) {
-        this.fline_address = fline_address;
-    }
-
-    public String getSline_address() {
-        return sline_address;
-    }
-
-    public void setSline_address(String sline_address) {
-        this.sline_address = sline_address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPost_code() {
-        return post_code;
-    }
-
-    public void setPost_code(String post_code) {
-        this.post_code = post_code;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCard_num() {
-        return card_num;
-    }
-
-    public void setCard_num(String card_num) {
-        this.card_num = card_num;
-    }
-
-    public String getCvv() {
-        return cvv;
-    }
-
-    public void setCvv(String cvv) {
-        this.cvv = cvv;
+    public void setPassword_(String password_) {
+        this.password_ = password_;
     }
 }

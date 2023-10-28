@@ -7,10 +7,10 @@ public class Book {
     String title;
     String author;
     String genre;
-    String image_src;
+    String imageSrc;
     float stars;
     BigDecimal price;
-    int stock_quantity;
+    int stockQuantity;
 
     public String getId() {
         return id;
@@ -44,12 +44,12 @@ public class Book {
         this.genre = genre;
     }
 
-    public String getImage_src() {
-        return image_src;
+    public String getImageSrc() {
+        return imageSrc;
     }
 
-    public void setImage_src(String image_src) {
-        this.image_src = image_src;
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
     }
 
     public float getStars() {
@@ -68,11 +68,11 @@ public class Book {
         this.price = price;
     }
 
-    public int getStock_quantity() {
-        return stock_quantity;
+    public int getStockQuantity() {
+        return stockQuantity;
     }
 
-    public void setStock_quantity(int stock_quantity) {
-        this.stock_quantity = stock_quantity;
+    public void setStock_quantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 }
