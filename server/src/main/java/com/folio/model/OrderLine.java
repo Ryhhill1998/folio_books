@@ -29,7 +29,7 @@ public class OrderLine {
         return bookId;
     }
 
-    public void setBook_id(String bookId) {
+    public void setBookId(String bookId) {
         this.bookId = bookId;
     }
 
