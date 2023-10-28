@@ -23,13 +23,13 @@ public class OrderLineDao {
     public CustomerOrderDao customerOrderDao;
 
     public OrderLine addOrderLine(OrderLine orderLine) {
-        String sql = "INSERT INTO orderLines(order_id, book_id, quantity, price_per_book) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO orderLine(orderId, bookId, quantity, pricePerBook) VALUES(?,?,?,?)";
         jdbcTemplate.update(
                 sql,
-                orderLine.getOrder_id(),
-                orderLine.getBook_id(),
+                orderLine.getOrderId(),
+                orderLine.getBookId(),
                 orderLine.getQuantity(),
-                orderLine.getPrice_per_book()
+                orderLine.getPricePerBook()
         );
 
         // Fetch the generated ID and set it in the OrderLine object
@@ -40,29 +40,29 @@ public class OrderLineDao {
     }
 
     public OrderLine getOrderLineById(int id) {
-        String sql = "SELECT * FROM order_line WHERE id = ?";
+        String sql = "SELECT * FROM orderLine WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new OrderLineMapper(), id);
     }
 
     public List<OrderLine> getOrderLinesByOrderId(int orderId) {
-        String sql = "SELECT * FROM order_line WHERE order_id = ?";
+        String sql = "SELECT * FROM orderLine WHERE orderId = ?";
         return jdbcTemplate.query(sql, new OrderLineMapper(), orderId);
     }
 
-    public List<OrderLine> getBasket(int customerId) {
+    public List<OrderLine> getOrderLinesInBasket(int customerId) {
         CustomerOrder basketOrder = customerOrderDao.getBasketCustomerOrdersByCustomerId(customerId);
         List<OrderLine> basketOrderLines = getOrderLinesByOrderId(basketOrder.getId());
         return basketOrderLines;
     }
 
     public void updateOrderLine(OrderLine orderLine) {
-        String sql = "UPDATE order_line SET order_id = ?, book_id = ?, quantity = ?, price_per_book = ? WHERE id = ?";
+        String sql = "UPDATE orderLine SET orderId = ?, bookId = ?, quantity = ?, pricePerBook = ? WHERE id = ?";
         jdbcTemplate.update(
                 sql,
-                orderLine.getOrder_id(),
-                orderLine.getBook_id(),
+                orderLine.getOrderId(),
+                orderLine.getBookId(),
                 orderLine.getQuantity(),
-                orderLine.getPrice_per_book(),
+                orderLine.getPricePerBook(),
                 orderLine.getId()
         );
     }
@@ -77,10 +77,10 @@ public class OrderLineDao {
         public OrderLine mapRow(ResultSet resultSet, int i) throws SQLException {
             OrderLine orderLine = new OrderLine();
             orderLine.setId(resultSet.getInt("id"));
-            orderLine.setOrder_id(resultSet.getInt("order_id"));
-            orderLine.setBook_id(resultSet.getString("book_id"));
+            orderLine.setOrderId(resultSet.getInt("orderId"));
+            orderLine.setBookId(resultSet.getString("bookId"));
             orderLine.setQuantity(resultSet.getInt("quantity"));
-            orderLine.setPrice_per_book(resultSet.getBigDecimal("price_per_book"));
+            orderLine.setPricePerBook(resultSet.getBigDecimal("pricePerBook"));
             return orderLine;
         }
     }
