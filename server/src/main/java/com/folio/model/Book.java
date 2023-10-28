@@ -72,7 +72,7 @@ public class Book {
         return stockQuantity;
     }
 
-    public void setStock_quantity(int stockQuantity) {
+    public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
 }
