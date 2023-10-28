@@ -27,7 +27,7 @@ public class Customer {
         return surname;
     }
 
-    public void setSname(String surname) {
+    public void setSurname(String surname) {
         this.surname = surname;
     }
 
