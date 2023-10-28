@@ -51,9 +51,8 @@ public class CustomerDao {
 
         int newCustomerId = ++lastCustomerId;
 
-        String sql = "INSERT INTO customer (id, forename, surname, email, password_)"
-                +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO customer (id, forename, surname, email, password_) "
+                + "VALUES (?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sql, newCustomerId, forename, surname, email, password_);
     }

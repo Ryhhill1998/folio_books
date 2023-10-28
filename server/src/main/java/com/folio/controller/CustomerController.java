@@ -41,19 +41,19 @@ public class CustomerController {
             Customer authenticatedCustomer = customerDao.authenticateCustomer(email, password);
 
             if (authenticatedCustomer != null) {
-                List<OrderLine> basketOrderLines = orderLineDao.getBasket(authenticatedCustomer.getId());
+                List<OrderLine> basketOrderLines = orderLineDao.getOrderLinesInBasket(authenticatedCustomer.getId());
                 List<Map<String, Object>> books = new ArrayList<>();
 
                 for (OrderLine orderLine : basketOrderLines) {
                     Map<String, Object> bookInfo = new HashMap<>();
-                    bookInfo.put("book_id", orderLine.getBook_id());
+                    bookInfo.put("book_id", orderLine.getBookId());
                     bookInfo.put("quantity", orderLine.getQuantity());
                     books.add(bookInfo);
                 }
 
                 Map<String, Object> response = new HashMap<>();
                 response.put("id", authenticatedCustomer.getId());
-                response.put("fname", authenticatedCustomer.getFname());
+                response.put("forename", authenticatedCustomer.getForename());
                 response.put("books", books);
 
                 return ResponseEntity.ok(response);
@@ -70,13 +70,14 @@ public class CustomerController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerCustomer(@RequestBody CustomerMap customer) {
+    public ResponseEntity<String> registerCustomer(@RequestBody Customer customer) {
         try {
             customerDao.createCustomer(customer);
             return ResponseEntity.ok("Registration successful");
         } catch (DuplicateKeyException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already registered");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Registration failed");
         }
     }
