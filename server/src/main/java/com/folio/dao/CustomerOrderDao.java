@@ -24,13 +24,13 @@ public class CustomerOrderDao {
         int newCustomerOrderId = lastCustomerOrderId + 1;
 
         // Prepare the SQL INSERT statement
-        String sql = "INSERT INTO customer_order (id, customer_id, status) " +
+        String sql = "INSERT INTO customerOrder (id, customerId, status) " +
                 "VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, newCustomerOrderId, customerOrder.getCustomer_id(), customerOrder.getStatus_());
+        jdbcTemplate.update(sql, newCustomerOrderId, customerOrder.getCustomerId(), customerOrder.getStatus_());
     }
 
     private int getLastCustomerOrderId() {
-        String sql = "SELECT MAX(id) FROM customer_order";
+        String sql = "SELECT MAX(id) FROM customerOrder";
         Integer maxId = jdbcTemplate.queryForObject(sql, Integer.class);
         if (maxId == null) {
             return 0;
@@ -40,23 +40,23 @@ public class CustomerOrderDao {
     }
 
     public CustomerOrder getCustomerOrderById(int id) {
-        String sql = "SELECT * FROM customer_order WHERE id = ?";
+        String sql = "SELECT * FROM customerOrder WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new CustomerOrderMapper(), id);
     }
 
     public List<CustomerOrder> getCustomerOrdersByCustomerId(int customerId) {
-        String sql = "SELECT * FROM customer_order WHERE customer_id = ?";
+        String sql = "SELECT * FROM customerOrder WHERE customerId = ?";
         return jdbcTemplate.query(sql, new CustomerOrderMapper(), customerId);
     }
 
     public CustomerOrder getBasketCustomerOrdersByCustomerId(int customerId) {
-        String sql = "SELECT * FROM customer_order WHERE customer_id = ? AND status_ = ?";
+        String sql = "SELECT * FROM customerOrder WHERE customerId = ? AND status_ = ?";
         return jdbcTemplate.queryForObject(sql, new CustomerOrderMapper(), customerId, "Basket");
     }
 
     public void updateCustomerOrder(CustomerOrder customerOrder) {
-        String sql = "UPDATE customer_order SET customer_id = ?, status = ? WHERE id = ?";
-        jdbcTemplate.update(sql, customerOrder.getCustomer_id(), customerOrder.getStatus_(), customerOrder.getId());
+        String sql = "UPDATE customer_order SET customerId = ?, status = ? WHERE id = ?";
+        jdbcTemplate.update(sql, customerOrder.getCustomerId(), customerOrder.getStatus_(), customerOrder.getId());
     }
 
     public void deleteCustomerOrder(int id) {
