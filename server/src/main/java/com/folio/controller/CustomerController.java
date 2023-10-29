@@ -26,13 +26,6 @@ public class CustomerController {
     @Autowired
     OrderLineDao orderLineDao;
 
-    @GetMapping("/get")
-    public ResponseEntity<String> getTestJson() {
-        String jsonResponse = "{\"message\": \"This is a test JSON response.\"}";
-
-        return ResponseEntity.ok(jsonResponse);
-    }
-
     @PostMapping("/sign-in")
     public ResponseEntity<Map<String, Object>> signInCustomer(@RequestBody Map<String, Object> request) {
         try {
