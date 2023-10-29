@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -49,26 +48,7 @@ public class CustomerController {
 
                 Map<String, Object> response = new HashMap<>();
                 response.put("id", authenticatedCustomer.getId());
-                response.put("forename", authenticatedCustomer.getForename());
-                
-                List<OrderLine> basketOrderLines = orderLineDao.getOrderLinesInBasket(authenticatedCustomer.getId());
-                if (basketOrderLines == null) { // if customer has no books in basket
-                        response.put("books", null);
-                        return ResponseEntity.ok(response); // return customer info with empty basket
-                    }
-
-                List<Map<String, Object>> books = new ArrayList<>();
-
-                for (OrderLine orderLine : basketOrderLines) {
-                    Map<String, Object> bookInfo = new HashMap<>();
-                    bookInfo.put("bookId", orderLine.getBookId());
-                    bookInfo.put("quantity", orderLine.getQuantity());
-                    books.add(bookInfo);
-                }
-
-                response.put("books", books);
-
-                
+                response.put("forename", authenticatedCustomer.getForename());                
                 return ResponseEntity.ok(response);
 
             } else {
