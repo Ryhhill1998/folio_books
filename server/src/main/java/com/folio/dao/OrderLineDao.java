@@ -5,6 +5,7 @@ import com.folio.model.CustomerOrder;
 import com.folio.model.OrderLine;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ public class OrderLineDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Autowired
     public CustomerOrderDao customerOrderDao;
 
     public OrderLine addOrderLine(OrderLine orderLine) {
