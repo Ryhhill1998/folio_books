@@ -5,6 +5,7 @@ import com.folio.model.CustomerOrder;
 import com.folio.model.OrderLine;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ public class OrderLineDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Autowired
     public CustomerOrderDao customerOrderDao;
 
     public OrderLine addOrderLine(OrderLine orderLine) {
@@ -50,9 +52,14 @@ public class OrderLineDao {
     }
 
     public List<OrderLine> getOrderLinesInBasket(int customerId) {
-        CustomerOrder basketOrder = customerOrderDao.getBasketCustomerOrdersByCustomerId(customerId);
-        List<OrderLine> basketOrderLines = getOrderLinesByOrderId(basketOrder.getId());
-        return basketOrderLines;
+        try {
+            CustomerOrder basketOrder = customerOrderDao.getBasketCustomerOrdersByCustomerId(customerId);
+            List<OrderLine> basketOrderLines = getOrderLinesByOrderId(basketOrder.getId());
+            return basketOrderLines;
+        } catch (Exception e) {
+            return null;
+        }
+        
     }
 
     public void updateOrderLine(OrderLine orderLine) {

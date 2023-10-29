@@ -69,8 +69,8 @@ public class CustomerOrderDao {
         public CustomerOrder mapRow(ResultSet resultSet, int i) throws SQLException {
             CustomerOrder customerOrder = new CustomerOrder();
             customerOrder.setId(resultSet.getInt("id"));
-            customerOrder.setCustomer_id(resultSet.getInt("customer_id"));
-            customerOrder.setStatus_(resultSet.getString("status"));
+            customerOrder.setCustomer_id(resultSet.getInt("customerId"));
+            customerOrder.setStatus_(resultSet.getString("status_"));
             return customerOrder;
         }
     }
