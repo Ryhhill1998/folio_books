@@ -52,9 +52,14 @@ public class OrderLineDao {
     }
 
     public List<OrderLine> getOrderLinesInBasket(int customerId) {
-        CustomerOrder basketOrder = customerOrderDao.getBasketCustomerOrdersByCustomerId(customerId);
-        List<OrderLine> basketOrderLines = getOrderLinesByOrderId(basketOrder.getId());
-        return basketOrderLines;
+        try {
+            CustomerOrder basketOrder = customerOrderDao.getBasketCustomerOrdersByCustomerId(customerId);
+            List<OrderLine> basketOrderLines = getOrderLinesByOrderId(basketOrder.getId());
+            return basketOrderLines;
+        } catch (Exception e) {
+            return null;
+        }
+        
     }
 
     public void updateOrderLine(OrderLine orderLine) {
