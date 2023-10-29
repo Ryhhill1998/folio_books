@@ -8,6 +8,7 @@ import com.folio.model.OrderLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,13 +26,6 @@ public class CustomerController {
 
     @Autowired
     OrderLineDao orderLineDao;
-
-    @GetMapping("/get")
-    public ResponseEntity<String> getTestJson() {
-        String jsonResponse = "{\"message\": \"This is a test JSON response.\"}";
-
-        return ResponseEntity.ok(jsonResponse);
-    }
 
     @PostMapping("/sign-in")
     public ResponseEntity<Map<String, Object>> signInCustomer(@RequestBody Map<String, Object> request) {
@@ -64,15 +58,15 @@ public class CustomerController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Map<String, Object>> registerCustomer(@RequestBody Customer customer) {
         try {
             customerDao.createCustomer(customer);
-            return ResponseEntity.ok("Registration successful");
+            return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("Message", "Registration successful"));
         } catch (DuplicateKeyException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already registered");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Collections.singletonMap("Error", "Email already registered"));
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Registration failed");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("Error", "Registration failed"));
         }
     }
 }
