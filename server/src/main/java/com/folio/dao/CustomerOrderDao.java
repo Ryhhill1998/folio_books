@@ -24,7 +24,7 @@ public class CustomerOrderDao {
         int newCustomerOrderId = lastCustomerOrderId + 1;
 
         // Prepare the SQL INSERT statement
-        String sql = "INSERT INTO customerOrder (id, customerId, status) " +
+        String sql = "INSERT INTO customerOrder (id, customerId, status_) " +
                 "VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(sql, newCustomerOrderId, customerOrder.getCustomerId(), customerOrder.getStatus_());
     }
@@ -55,12 +55,12 @@ public class CustomerOrderDao {
     }
 
     public void updateCustomerOrder(CustomerOrder customerOrder) {
-        String sql = "UPDATE customer_order SET customerId = ?, status = ? WHERE id = ?";
+        String sql = "UPDATE customerOrder SET customerId = ?, status_ = ? WHERE id = ?";
         jdbcTemplate.update(sql, customerOrder.getCustomerId(), customerOrder.getStatus_(), customerOrder.getId());
     }
 
     public void deleteCustomerOrder(int id) {
-        String sql = "DELETE FROM customer_order WHERE id = ?";
+        String sql = "DELETE FROM customerOrder WHERE id = ?";
         jdbcTemplate.update(sql, id);
     }
 
