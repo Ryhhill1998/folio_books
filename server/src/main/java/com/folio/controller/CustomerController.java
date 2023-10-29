@@ -67,7 +67,6 @@ public class CustomerController {
                 }
 
                 response.put("books", books);
-
                 
                 return ResponseEntity.ok(response);
 
@@ -77,6 +76,7 @@ public class CustomerController {
                         .body(Collections.singletonMap("error", "Sign-in failed"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Collections.singletonMap("error", "Sign-in failed"));
         }

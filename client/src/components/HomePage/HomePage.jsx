@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSearchStore } from "../../globalStores/search";
 import Carousel from "../Carousel/Carousel";
 import BookCard from "../BookCard/BookCard";
+import { useBooksStore } from "../../globalStores/books";
 
 const HomePage = () => {
-  const [books, setBooks] = useState([]);
-  const [romanceBooks, setRomanceBooks] = useState([]);
-  const [crimeMysteryThrillerBooks, setCrimeMysteryThrillerBooks] = useState(
-    []
-  );
-  const [scienceFictionBooks, setScienceFictionBooks] = useState([]);
-  const [graphicNovelBooks, setGraphicNovelBooks] = useState([]);
+  const books = useBooksStore((store) => store.books);
+  const getBooks = useBooksStore((store) => store.getBooks);
 
   const searchIsActive = useSearchStore((store) => store.active);
   const searchQuery = useSearchStore((store) => store.query);
@@ -34,27 +30,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8080/get-books")
-      .then((response) => response.json())
-      .then((books) => {
-        setBooks(books);
-
-        setRomanceBooks(
-          books?.length && books?.filter(({ genre }) => genre === "romance")
-        );
-        setCrimeMysteryThrillerBooks(
-          books?.length &&
-            books?.filter(({ genre }) => genre === "crime_mystery_thriller")
-        );
-        setScienceFictionBooks(
-          books?.length &&
-            books?.filter(({ genre }) => genre === "science_fiction")
-        );
-        setGraphicNovelBooks(
-          books?.length &&
-            books?.filter(({ genre }) => genre === "graphic_novels")
-        );
-      });
+    getBooks();
   }, []);
 
   return (
@@ -72,25 +48,25 @@ const HomePage = () => {
           <div className="genre-container container">
             <h2 className="section-heading">Romance</h2>
 
-            <Carousel books={romanceBooks} />
+            <Carousel books={books?.romanceBooks} />
           </div>
 
           <div className="genre-container container">
             <h2 className="section-heading">Crime, Mystery and Thriller</h2>
 
-            <Carousel books={crimeMysteryThrillerBooks} />
+            <Carousel books={books?.crimeMysteryThrillerBooks} />
           </div>
 
           <div className="genre-container container">
             <h2 className="section-heading">Science Fiction</h2>
 
-            <Carousel books={scienceFictionBooks} />
+            <Carousel books={books?.scienceFictionBooks} />
           </div>
 
           <div className="genre-container container">
             <h2 className="section-heading">Graphic Novels</h2>
 
-            <Carousel books={graphicNovelBooks} />
+            <Carousel books={books?.graphicNovelBooks} />
           </div>
         </>
       )}

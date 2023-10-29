@@ -8,7 +8,7 @@ import { faStar as emptyStarIcon } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
 import { useProfileStore } from "../../globalStores/profile";
 
-const BookCard = ({ id, title, image_src, author, stars, price }) => {
+const BookCard = ({ id, title, imageSrc, author, stars, price }) => {
   const [hoveredId, setHoveredId] = useState(null);
 
   const addBookToBasket = useProfileStore((store) => store.addBookToBasket);
@@ -55,7 +55,7 @@ const BookCard = ({ id, title, image_src, author, stars, price }) => {
       onMouseLeave={() => setHoveredId(null)}
     >
       <div className="image-container">
-        <img src={image_src} alt="title" />
+        <img src={imageSrc} alt="title" />
       </div>
 
       {id === hoveredId && <div className="overlay"></div>}
@@ -75,7 +75,7 @@ const BookCard = ({ id, title, image_src, author, stars, price }) => {
           <button
             className="add-button"
             onClick={() =>
-              addBookToBasket({ id, title, image_src, author, stars, price })
+              addBookToBasket({ id, title, imageSrc, author, stars, price })
             }
           >
             Add to Basket
