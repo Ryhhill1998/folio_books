@@ -35,27 +35,40 @@ public class CustomerController {
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<Map<String, Object>> signInCustomer(@RequestParam String email,
-            @RequestParam String password) {
+    public ResponseEntity<Map<String, Object>> signInCustomer(@RequestBody Map<String, Object> request) {
         try {
-            Customer authenticatedCustomer = customerDao.authenticateCustomer(email, password);
+            // get specific JSON values from request
+            String email = (String) request.get("email");
+            String password_ = (String) request.get("password_");
+
+            // check if Customer exists in database
+            Customer authenticatedCustomer = customerDao.authenticateCustomer(email, password_);
 
             if (authenticatedCustomer != null) {
-                List<OrderLine> basketOrderLines = orderLineDao.getOrderLinesInBasket(authenticatedCustomer.getId());
-                List<Map<String, Object>> books = new ArrayList<>();
-
-                for (OrderLine orderLine : basketOrderLines) {
-                    Map<String, Object> bookInfo = new HashMap<>();
-                    bookInfo.put("book_id", orderLine.getBookId());
-                    bookInfo.put("quantity", orderLine.getQuantity());
-                    books.add(bookInfo);
-                }
+                // retrieve customer orders in basket
 
                 Map<String, Object> response = new HashMap<>();
                 response.put("id", authenticatedCustomer.getId());
                 response.put("forename", authenticatedCustomer.getForename());
+                
+                List<OrderLine> basketOrderLines = orderLineDao.getOrderLinesInBasket(authenticatedCustomer.getId());
+                if (basketOrderLines == null) { // if customer has no books in basket
+                        response.put("books", null);
+                        return ResponseEntity.ok(response); // return customer info with empty basket
+                    }
+
+                List<Map<String, Object>> books = new ArrayList<>();
+
+                for (OrderLine orderLine : basketOrderLines) {
+                    Map<String, Object> bookInfo = new HashMap<>();
+                    bookInfo.put("bookId", orderLine.getBookId());
+                    bookInfo.put("quantity", orderLine.getQuantity());
+                    books.add(bookInfo);
+                }
+
                 response.put("books", books);
 
+                
                 return ResponseEntity.ok(response);
 
             } else {
