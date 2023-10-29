@@ -28,11 +28,11 @@ public class CustomerController {
     OrderLineDao orderLineDao;
 
     @PostMapping("/sign-in")
-    public ResponseEntity<Map<String, Object>> signInCustomer(@RequestBody Map<String, Object> request) {
+    public ResponseEntity<Map<String, Object>> signInCustomer(@RequestBody Customer customer) {
         try {
             // get specific JSON values from request
-            String email = (String) request.get("email");
-            String password_ = (String) request.get("password_");
+            String email = customer.getEmail();
+            String password_ = customer.getPassword_();
 
             // check if Customer exists in database
             Customer authenticatedCustomer = customerDao.authenticateCustomer(email, password_);
