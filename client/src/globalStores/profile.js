@@ -79,14 +79,30 @@ export const useProfileStore = create(
           });
         }
       },
-      addBookToBasket: (book) => {
-        const user = get().user;
-        const { basket } = user;
-        const updatedBasket = [...basket, book];
-        user.basket = updatedBasket;
-        console.log({ user });
+      addBookToBasket: async (bookId) => {
+        const userId = get().user.id;
 
-        set({ user });
+        const response = await fetch(
+          "http://localhost:8080/add-to-basket?" +
+            new URLSearchParams({
+              customerId: userId,
+              bookId,
+            }),
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const message = await response.json();
+
+        if (response.status === 200) {
+          console.log(message);
+        } else {
+          console.error(message);
+        }
       },
       signOutUser: () => {
         set({

@@ -1,13 +1,18 @@
 package com.folio.dao;
 
 import com.folio.model.CustomerOrder;
+
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CustomerOrderDao {
@@ -50,8 +55,14 @@ public class CustomerOrderDao {
     }
 
     public CustomerOrder getBasketCustomerOrdersByCustomerId(int customerId) {
-        String sql = "SELECT * FROM customerOrder WHERE customerId = ? AND status_ = ?";
+        try {
+            String sql = "SELECT * FROM customerOrder WHERE customerId = ? AND status_ = ?";
         return jdbcTemplate.queryForObject(sql, new CustomerOrderMapper(), customerId, "Basket");
+        }catch(EmptyResultDataAccessException e) {
+            return null;
+        }catch(IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
     }
 
     public void updateCustomerOrder(CustomerOrder customerOrder) {

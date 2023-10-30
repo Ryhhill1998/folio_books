@@ -34,22 +34,24 @@ public class OrderController {
     BookDao bookDao;
 
     @PostMapping("/add-to-basket")
-    public ResponseEntity<Map<String, Object>> addToBasket(@RequestParam int customerId, @RequestParam String bookId) {
+    public ResponseEntity<Map<String, Object>> addToBasket(@RequestParam String customerId, @RequestParam String bookId) {
         
         try {
+            // convert customerId from String to int
+            int id = Integer.parseInt(customerId);
             // check if customer already has order in basket
-            CustomerOrder customerOrder = customerOrderDao.getBasketCustomerOrdersByCustomerId(customerId); 
+            CustomerOrder customerOrder = customerOrderDao.getBasketCustomerOrdersByCustomerId(id); 
             
             if (customerOrder == null){
                 // create new customerOrder if no order created
                 customerOrder = new CustomerOrder();
-                customerOrder.setCustomer_id(customerId);
+                customerOrder.setCustomer_id(id);
                 customerOrder.setStatus_("Basket");
                 customerOrderDao.createCustomerOrder(customerOrder);
             }
             
             // check if book already in basket
-            List<OrderLine> orderLinesInBasket = orderLineDao.getOrderLinesInBasket(customerId);
+            List<OrderLine> orderLinesInBasket = orderLineDao.getOrderLinesInBasket(id);
             
             boolean exists = false;
 
@@ -68,7 +70,7 @@ public class OrderController {
                 OrderLine orderLine = new OrderLine();
                 orderLine.setOrderId(customerOrder.getId());
                 orderLine.setBookId(bookId);
-                orderLine.setQuantity(customerId);
+                orderLine.setQuantity(id);
                 orderLine.setPricePerBook(bookDao.getBookById(bookId).getPrice());
                 orderLineDao.addOrderLine(orderLine);
             } 
@@ -77,6 +79,7 @@ public class OrderController {
                             .status(HttpStatus.OK)
                             .body(Collections.singletonMap("message", "success"));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity
                             .status(HttpStatus.BAD_REQUEST)
                             .body(Collections.singletonMap("message", "failure"));

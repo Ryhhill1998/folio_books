@@ -72,12 +72,7 @@ const BookCard = ({ id, title, imageSrc, author, stars, price }) => {
             <p>£{price}</p>
           </div>
 
-          <button
-            className="add-button"
-            onClick={() =>
-              addBookToBasket({ id, title, imageSrc, author, stars, price })
-            }
-          >
+          <button className="add-button" onClick={() => addBookToBasket(id)}>
             Add to Basket
           </button>
         </div>
