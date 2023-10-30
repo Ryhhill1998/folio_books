@@ -15,7 +15,12 @@ const HomePage = () => {
     string?.toLowerCase()?.includes(queryString.toLowerCase());
 
   const renderFilteredBooks = () => {
-    const filteredBooks = books?.filter((book) => {
+    const filteredBooks = [
+      ...books?.romanceBooks,
+      ...books?.crimeMysteryThrillerBooks,
+      ...books?.scienceFictionBooks,
+      ...books?.graphicNovelBooks
+    ]?.filter((book) => {
       const { title, author, genre } = book;
 
       return (
