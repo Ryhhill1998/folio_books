@@ -19,7 +19,7 @@ const HomePage = () => {
       ...books?.romanceBooks,
       ...books?.crimeMysteryThrillerBooks,
       ...books?.scienceFictionBooks,
-      ...books?.graphicNovelBooks
+      ...books?.graphicNovelBooks,
     ]?.filter((book) => {
       const { title, author, genre } = book;
 
