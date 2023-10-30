@@ -30,7 +30,7 @@ public class CustomerOrderDao {
 
         // Prepare the SQL INSERT statement
         String sql = "INSERT INTO customerOrder (id, customerId, status_) " +
-                "VALUES (?, ?, ?, ?)";
+                "VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, newCustomerOrderId, customerOrder.getCustomerId(), customerOrder.getStatus_());
     }
 
@@ -57,10 +57,10 @@ public class CustomerOrderDao {
     public CustomerOrder getBasketCustomerOrdersByCustomerId(int customerId) {
         try {
             String sql = "SELECT * FROM customerOrder WHERE customerId = ? AND status_ = ?";
-        return jdbcTemplate.queryForObject(sql, new CustomerOrderMapper(), customerId, "Basket");
-        }catch(EmptyResultDataAccessException e) {
+            return jdbcTemplate.queryForObject(sql, new CustomerOrderMapper(), customerId, "Basket");
+        } catch(EmptyResultDataAccessException e) {
             return null;
-        }catch(IncorrectResultSizeDataAccessException e) {
+        } catch(IncorrectResultSizeDataAccessException e) {
             return null;
         }
     }
