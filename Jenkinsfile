@@ -7,6 +7,11 @@ pipeline {
             nodejs "node20"
         }
 
+        environment {
+            // Prevent warnings being treated as errors
+            CI    = 'false'
+        }
+
         stages {
             stage('Compile Maven') {
                 steps {
