@@ -19,17 +19,17 @@ pipeline {
                     sh "mvn test -f server/pom.xml"
                 }
             }
-            // stage('SonarQube') {
-            //     environment {
-            //         scannerHome = tool 'sonarqube'
-            //     }
+            stage('SonarQube') {
+                environment {
+                    scannerHome = tool 'sonarqube'
+                }
 
-            //     steps {
-            //         withSonarQubeEnv('sonar-qube-1') {
-            //             sh "${scannerHome}/bin/sonar-scanner"
-            //         }
-            //     }
-            // }
+                steps {
+                    withSonarQubeEnv('sonar-qube-1') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
             stage('Package') {
                 steps {
                     // Run Maven on a Unix agent.
