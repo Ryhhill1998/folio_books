@@ -4,16 +4,17 @@ pipeline {
         tools {
             // Install the Maven version configured as "M3" and add it to the path.
             maven "M3"
+            node "node20"
         }
 
         stages {
-            stage('Compile') {
+            stage('Compile Maven') {
                 steps {
                     // Run Maven on a Unix agent.
                     sh "mvn clean compile -f server/pom.xml"
                 }
             }
-            stage('Test') {
+            stage('Test Maven') {
                 steps {
                     // Run Maven on a Unix agent.
                     sh "mvn test -f server/pom.xml"
@@ -30,10 +31,20 @@ pipeline {
                     }
                 }
             }
-            stage('Package') {
+            stage('Package Maven') {
                 steps {
                     // Run Maven on a Unix agent.
                     sh "mvn package -f server/pom.xml"
+                }
+            }
+            stage('Npm install') {
+                dir('client') {
+                    sh "npm install"
+                }
+            }
+            stage('Npm build') {
+                dir('client') {
+                    sh "npm run build"
                 }
             }
         }

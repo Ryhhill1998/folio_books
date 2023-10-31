@@ -1,3 +1,4 @@
 client/node_modules
 .idea/
 folio_books.iml
+/client/build
