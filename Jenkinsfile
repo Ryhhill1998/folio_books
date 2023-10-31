@@ -10,14 +10,12 @@ pipeline {
             stage('Compile') {
                 steps {
                     // Run Maven on a Unix agent.
-                    sh "cd server"
-                    sh "mvn clean compile"
+                    sh "mvn clean compile -f server/pom.xml"
                 }
             }
             stage('Test') {
                 steps {
                     // Run Maven on a Unix agent.
-                    // sh "cd server"
                     sh "mvn test"
                 }
             }
@@ -35,7 +33,6 @@ pipeline {
             stage('Package') {
                 steps {
                     // Run Maven on a Unix agent.
-                    // sh "cd server"
                     sh "mvn package"
                 }
             }
