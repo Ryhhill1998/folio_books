@@ -38,13 +38,17 @@ pipeline {
                 }
             }
             stage('Npm install') {
-                dir('client') {
-                    sh "npm install"
+                steps {
+                    dir('client') {
+                        sh "npm install"
+                    }
                 }
             }
             stage('Npm build') {
-                dir('client') {
-                    sh "npm run build"
+                steps{
+                    dir('client') {
+                        sh "npm run build"
+                    }
                 }
             }
         }
