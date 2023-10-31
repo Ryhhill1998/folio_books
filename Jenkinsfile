@@ -16,7 +16,7 @@ pipeline {
             stage('Test') {
                 steps {
                     // Run Maven on a Unix agent.
-                    sh "mvn test"
+                    sh "mvn test -f server/pom.xml"
                 }
             }
             // stage('SonarQube') {
@@ -33,7 +33,7 @@ pipeline {
             stage('Package') {
                 steps {
                     // Run Maven on a Unix agent.
-                    sh "mvn package"
+                    sh "mvn package -f server/pom.xml"
                 }
             }
         }
