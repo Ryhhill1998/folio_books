@@ -1,8 +1,5 @@
 FROM node:20-alpine as build
 
-# change into a folder called /app
-WORKDIR /app
-
 # only copy package.json
 COPY package*.json .
 

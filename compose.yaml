@@ -1,0 +1,10 @@
+services:
+  frontend:
+    build: ./client
+    ports:
+    - "3000:3000"
+
+  backend:
+    image: folio_books-backend-2
+    ports:
+    - "8080:8080"
